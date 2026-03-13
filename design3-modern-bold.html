@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thai Therapie Massage Ninove — One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#F6F2EC; --bg2:#EDE7DA; --bg3:#E4DDD0;
+  --green:#1C3A2B; --green2:#2A5540;
+  --sage:#4C7060; --sage-lt:#8CB09A; --mint:#C4DDD0;
+  --warm:#B5693E; --warm-lt:#D9956B;
+  --cream:#FAF7F2;
+  --text:#1A1916; --muted:#6A6860;
+  --border:rgba(28,58,43,.10);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* Cursor */
+.cursor-dot{width:8px;height:8px;background:var(--green);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s;}
+.cursor-ring{width:36px;height:36px;border:1.5px solid var(--green);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;}
+
+/* Grain */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.reveal.s1{transition-delay:.1s;} .reveal.s2{transition-delay:.2s;} .reveal.s3{transition-delay:.3s;} .reveal.s4{transition-delay:.4s;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* FAB */
+.fab{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.fab-btn{display:flex;align-items:center;gap:9px;padding:13px 22px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:500;cursor:none;transition:transform .25s,box-shadow .25s;}
+.fab-btn:hover{transform:translateY(-3px);}
+.fab-call{background:var(--green);color:var(--cream);box-shadow:0 8px 28px rgba(28,58,43,.35);}
+.fab-call:hover{box-shadow:0 14px 36px rgba(28,58,43,.45);}
+.fab-wa{background:#25D366;color:white;box-shadow:0 6px 20px rgba(37,211,102,.3);}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:400;padding:0 60px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s;}
+nav.scrolled{background:rgba(246,242,236,.93);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-mark{width:32px;height:32px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.nav-mark svg{width:14px;height:14px;fill:var(--mint);}
+.nav-wordmark{font-family:'Fraunces',serif;font-size:15px;font-weight:400;color:var(--green);}
+.nav-wordmark em{font-style:italic;color:var(--sage);}
+.nav-links{display:flex;gap:30px;list-style:none;align-items:center;}
+.nav-links a{font-size:13px;font-weight:400;color:var(--muted);transition:color .25s;}
+.nav-links a:hover{color:var(--green);}
+.nav-cta-btn{padding:10px 22px;background:var(--green) !important;color:var(--cream) !important;border-radius:50px;font-weight:500 !important;transition:background .25s !important;}
+.nav-cta-btn:hover{background:var(--green2) !important;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:140px 64px 80px 80px;position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(28,58,43,.08);color:var(--sage);padding:7px 15px;border-radius:50px;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:34px;width:fit-content;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--sage-lt);border-radius:50%;animation:breathe 2.5s ease-in-out infinite;}
+@keyframes breathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero-h1{font-family:'Fraunces',serif;font-size:clamp(46px,4.2vw,68px);font-weight:300;line-height:1.06;letter-spacing:-.5px;color:var(--text);margin-bottom:26px;}
+.hero-h1 em{font-style:italic;color:var(--green);font-weight:400;}
+.hero-divider{width:48px;height:1.5px;background:var(--sage-lt);margin-bottom:24px;}
+.hero-desc{font-size:15px;line-height:1.85;color:var(--muted);max-width:400px;margin-bottom:40px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:9px;padding:15px 28px;background:var(--green);color:var(--cream);border-radius:50px;font-size:14px;font-weight:500;transition:background .3s,transform .25s,box-shadow .3s;box-shadow:0 6px 24px rgba(28,58,43,.22);}
+.btn-primary:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 10px 32px rgba(28,58,43,.32);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border:1.5px solid var(--border);color:var(--sage);border-radius:50px;font-size:14px;font-weight:400;transition:border-color .3s,background .3s,color .3s;}
+.btn-ghost:hover{border-color:var(--sage);background:rgba(76,112,96,.06);}
+.hero-trust{margin-top:48px;display:flex;align-items:center;gap:14px;padding-top:32px;border-top:1px solid var(--border);}
+.trust-stars{color:#D4900A;font-size:14px;letter-spacing:3px;}
+.trust-text{font-size:12px;color:var(--muted);line-height:1.5;}
+.trust-text strong{color:var(--text);font-weight:500;}
+/* hero right */
+.hero-right{position:relative;overflow:hidden;}
+.hero-img{width:100%;height:100%;object-fit:cover;animation:slowZoom 16s ease-in-out infinite alternate;}
+@keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(28,58,43,.25) 100%);}
+.hero-pill-price{position:absolute;bottom:40px;left:-20px;background:var(--cream);border-radius:16px;padding:20px 24px;box-shadow:0 16px 48px rgba(28,58,43,.18);z-index:3;animation:float 4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.pill-price{font-family:'Fraunces',serif;font-size:36px;font-weight:300;color:var(--green);line-height:1;}
+.pill-price sup{font-size:18px;vertical-align:super;}
+.pill-label{font-size:11px;color:var(--muted);margin-top:4px;}
+.hero-open{position:absolute;top:36px;right:24px;background:rgba(250,247,242,.88);backdrop-filter:blur(8px);border-radius:50px;padding:9px 18px;font-size:12px;font-weight:500;color:var(--green);display:flex;align-items:center;gap:7px;z-index:3;}
+.open-dot{width:7px;height:7px;background:#3BB56A;border-radius:50%;animation:breathe 2s infinite;}
+
+/* MARQUEE */
+.marquee-strip{background:var(--green);overflow:hidden;}
+.marquee-track{display:flex;width:max-content;animation:marquee 30s linear infinite;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.m-item{display:flex;align-items:center;gap:14px;padding:18px 44px;border-right:1px solid rgba(255,255,255,.1);white-space:nowrap;}
+.m-item .m-icon{font-size:16px;}
+.m-item .m-strong{font-size:12px;font-weight:500;color:var(--mint);letter-spacing:.3px;}
+.m-item .m-light{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1px;}
+.m-sep{color:rgba(255,255,255,.2);padding:0 4px;}
+
+/* INTRO */
+.intro-wrap{max-width:1320px;margin:0 auto;padding:100px 80px 0;}
+.intro-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:end;}
+.section-eyebrow{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.section-eyebrow::before{content:'';width:22px;height:1px;background:var(--sage-lt);}
+.intro-h{font-family:'Fraunces',serif;font-size:clamp(36px,3.2vw,50px);font-weight:300;line-height:1.1;}
+.intro-h em{font-style:italic;color:var(--green);}
+.intro-body{font-size:15px;line-height:1.9;color:var(--muted);}
+.intro-body p+p{margin-top:14px;}
+.intro-body strong{color:var(--text);font-weight:500;}
+.intro-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:14px;font-weight:500;border-bottom:1px solid var(--sage-lt);padding-bottom:2px;margin-top:24px;transition:gap .25s,color .25s;}
+.intro-link:hover{gap:14px;}
+
+/* SYSTEMS */
+.systems-wrap{max-width:1320px;margin:0 auto;padding:48px 80px 100px;}
+.systems-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.sys-card{background:var(--cream);border:1px solid var(--border);border-radius:14px;padding:30px 24px;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;}
+.sys-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(28,58,43,.09);}
+.sys-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-lt),var(--sage));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.sys-card:hover::after{transform:scaleX(1);}
+.sys-num{font-family:'Fraunces',serif;font-size:48px;font-weight:300;color:rgba(28,58,43,.07);line-height:1;margin-bottom:12px;}
+.sys-icon{font-size:22px;margin-bottom:12px;}
+.sys-title{font-family:'Fraunces',serif;font-size:16px;font-weight:400;color:var(--text);margin-bottom:8px;}
+.sys-desc{font-size:12.5px;color:var(--muted);line-height:1.65;}
+
+/* TREATMENTS */
+.treatments-section{background:var(--bg2);padding:100px 80px;}
+.treat-header{display:flex;justify-content:space-between;align-items:flex-end;max-width:1320px;margin:0 auto 56px;gap:24px;}
+.treat-header-left{}
+.treat-h{font-family:'Fraunces',serif;font-size:clamp(34px,2.8vw,48px);font-weight:300;line-height:1.1;}
+.treat-h em{font-style:italic;color:var(--green);}
+.treat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1320px;margin:0 auto;}
+.treat-card{background:var(--cream);border-radius:16px;overflow:hidden;position:relative;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s;}
+.treat-card:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(28,58,43,.14);}
+.treat-img-wrap{position:relative;overflow:hidden;height:240px;}
+.treat-img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1);filter:brightness(.88) saturate(.88);}
+.treat-card:hover .treat-img{transform:scale(1.08);filter:brightness(.95) saturate(1.05);}
+.treat-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 45%,rgba(28,58,43,.38) 100%);opacity:0;transition:opacity .4s;}
+.treat-card:hover .treat-overlay{opacity:1;}
+.treat-badge{position:absolute;top:14px;left:14px;background:rgba(250,247,242,.88);backdrop-filter:blur(6px);border-radius:50px;padding:4px 12px;font-family:'Fraunces',serif;font-size:12px;color:var(--green);}
+.treat-body{padding:22px 22px 26px;}
+.treat-name{font-family:'Fraunces',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:9px;line-height:1.2;}
+.treat-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.treat-price{display:inline-flex;align-items:center;gap:6px;background:rgba(28,58,43,.07);color:var(--sage);padding:5px 13px;border-radius:50px;font-size:12px;font-weight:500;}
+
+/* PROCESS */
+.process-section{padding:100px 80px;max-width:1320px;margin:0 auto;}
+.process-header{margin-bottom:64px;}
+.process-h{font-family:'Fraunces',serif;font-size:clamp(34px,3vw,48px);font-weight:300;line-height:1.1;}
+.process-h em{font-style:italic;color:var(--green);}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+.process-grid::before{content:'';position:absolute;top:44px;left:16%;right:16%;height:1px;background:linear-gradient(90deg,transparent,var(--sage-lt) 20%,var(--sage-lt) 80%,transparent);}
+.process-step{padding:0 28px;text-align:center;position:relative;z-index:1;}
+.step-circle{width:88px;height:88px;border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 26px;background:var(--cream);position:relative;transition:border-color .35s,transform .35s;}
+.process-step:hover .step-circle{border-color:var(--sage);transform:scale(1.06);}
+.step-n{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:var(--green);line-height:1;}
+.step-badge{position:absolute;bottom:-3px;right:-3px;width:24px;height:24px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.step-title{font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:var(--text);margin-bottom:12px;}
+.step-desc{font-size:14px;color:var(--muted);line-height:1.75;}
+
+/* PRICING */
+.pricing-section{background:var(--green);padding:90px 80px;position:relative;overflow:hidden;}
+.pricing-section::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:rgba(255,255,255,.04);border-radius:50%;}
+.pricing-section::after{content:'';position:absolute;bottom:-120px;left:-60px;width:300px;height:300px;background:rgba(255,255,255,.03);border-radius:50%;}
+.pricing-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2;}
+.pricing-left .section-eyebrow{color:var(--sage-lt);}
+.pricing-left .section-eyebrow::before{background:var(--sage-lt);}
+.pricing-left h2{font-family:'Fraunces',serif;font-size:clamp(34px,3vw,50px);font-weight:300;line-height:1.1;color:var(--cream);}
+.pricing-left h2 em{font-style:italic;color:var(--mint);}
+.pricing-left p{margin-top:18px;font-size:15px;color:rgba(255,255,255,.6);line-height:1.85;}
+.pricing-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:20px;padding:44px;backdrop-filter:blur(6px);}
+.price-big{font-family:'Fraunces',serif;font-size:84px;font-weight:300;color:white;line-height:1;letter-spacing:-2px;}
+.price-big sup{font-size:34px;vertical-align:top;margin-top:14px;display:inline-block;}
+.price-dur{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:1px;margin:8px 0 28px;}
+.price-perks{display:flex;flex-direction:column;gap:14px;margin-bottom:32px;}
+.price-perk{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.72);}
+.perk-check{width:20px;height:20px;min-width:20px;background:rgba(196,221,208,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;}
+.btn-book{display:block;text-align:center;background:white;color:var(--green);padding:16px;border-radius:50px;font-size:14px;font-weight:500;transition:background .3s;}
+.btn-book:hover{background:var(--mint);}
+
+/* ABOUT */
+.about-section{padding:100px 80px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.about-visual{position:relative;}
+.about-img-frame{border-radius:24px;overflow:hidden;height:580px;position:relative;}
+.about-img-frame img{width:100%;height:100%;object-fit:cover;filter:brightness(.88) saturate(.85);}
+.about-img-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(28,58,43,.3) 100%);z-index:1;}
+.about-bubble{position:absolute;top:-32px;left:-32px;width:180px;height:180px;background:var(--mint);border-radius:50%;opacity:.28;z-index:-1;}
+.about-float{position:absolute;bottom:-20px;right:-28px;background:var(--cream);border-radius:16px;padding:20px 24px;box-shadow:0 20px 56px rgba(28,58,43,.16);z-index:2;}
+.about-float-num{font-family:'Fraunces',serif;font-size:40px;font-weight:300;color:var(--green);line-height:1;}
+.about-float-lbl{font-size:11px;color:var(--muted);margin-top:4px;}
+.about-name{font-family:'Fraunces',serif;font-size:52px;font-weight:300;font-style:italic;color:var(--green);line-height:1;margin:14px 0 4px;}
+.about-role{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:26px;}
+.about-body{font-size:15px;line-height:1.9;color:var(--muted);}
+.about-body p+p{margin-top:14px;}
+.about-body strong{color:var(--text);font-weight:500;}
+.about-cta-wrap{margin-top:36px;}
+.about-hours{margin-top:28px;padding:22px 26px;background:var(--cream);border-radius:14px;border:1px solid var(--border);}
+.hours-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:14px;}
+.hour-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
+.hour-row:last-child{border:none;}
+.hr-d{color:var(--muted);}
+.hr-t{color:var(--text);font-weight:500;}
+
+/* REVIEWS */
+.reviews-section{background:var(--bg2);padding:100px 80px;}
+.reviews-header{max-width:1320px;margin:0 auto 52px;}
+.reviews-h{font-family:'Fraunces',serif;font-size:clamp(32px,2.8vw,46px);font-weight:300;line-height:1.1;}
+.reviews-h em{font-style:italic;color:var(--green);}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1320px;margin:0 auto;}
+.review-card{background:var(--cream);border-radius:16px;padding:34px;border:1px solid var(--border);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;}
+.review-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,58,43,.1);}
+.rv-quote{font-family:'Fraunces',serif;font-size:56px;color:rgba(28,58,43,.08);line-height:.8;margin-bottom:14px;}
+.rv-stars{color:#D4900A;font-size:13px;letter-spacing:2px;margin-bottom:14px;}
+.rv-text{font-size:14px;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:22px;}
+.rv-author{display:flex;align-items:center;gap:12px;}
+.rv-av{width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;color:var(--mint);font-style:italic;}
+.rv-name{font-size:13px;font-weight:500;color:var(--text);}
+.rv-src{font-size:11px;color:var(--muted);}
+
+/* FAQ */
+.faq-section{padding:100px 80px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:100px;align-items:start;}
+.faq-left-h{font-family:'Fraunces',serif;font-size:clamp(32px,2.8vw,46px);font-weight:300;line-height:1.1;position:sticky;top:90px;}
+.faq-left-h em{font-style:italic;color:var(--green);}
+.faq-left-p{font-size:14px;color:var(--muted);line-height:1.8;margin-top:14px;position:sticky;top:165px;}
+.faq-list{display:flex;flex-direction:column;gap:3px;}
+.faq-item{border-radius:12px;overflow:hidden;background:var(--cream);border:1px solid transparent;transition:border-color .25s;}
+.faq-item.open{border-color:var(--border);}
+.faq-q{padding:20px 22px;display:flex;justify-content:space-between;align-items:center;cursor:none;user-select:none;}
+.faq-q-text{font-size:15px;font-weight:500;color:var(--text);}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:14px;transition:transform .35s,background .25s,border-color .25s;font-size:18px;color:var(--sage);font-weight:300;line-height:1;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--green);border-color:var(--green);color:white;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1),padding .35s;padding:0 22px;}
+.faq-item.open .faq-a{max-height:200px;padding:0 22px 20px;}
+.faq-a p{font-size:14px;color:var(--muted);line-height:1.8;}
+
+/* CTA BANNER */
+.cta-banner{margin:0 80px 80px;background:var(--bg2);border-radius:24px;overflow:hidden;position:relative;padding:68px 80px;display:flex;align-items:center;justify-content:space-between;gap:40px;}
+.cta-banner::before{content:'';position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1400&q=80") center/cover;opacity:.1;}
+.cta-content{position:relative;z-index:1;}
+.cta-h{font-family:'Fraunces',serif;font-size:clamp(28px,2.8vw,42px);font-weight:300;line-height:1.15;}
+.cta-h em{font-style:italic;color:var(--green);}
+.cta-p{margin-top:10px;font-size:15px;color:var(--muted);}
+.cta-btns{position:relative;z-index:1;display:flex;gap:12px;flex-wrap:wrap;}
+
+/* CONTACT */
+.contact-section{padding:80px 80px 100px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+.contact-h{font-family:'Fraunces',serif;font-size:clamp(32px,2.8vw,46px);font-weight:300;line-height:1.1;margin-bottom:36px;}
+.contact-h em{font-style:italic;color:var(--green);}
+.ci-row{display:flex;gap:14px;margin-bottom:24px;align-items:flex-start;}
+.ci-ico{width:40px;height:40px;min-width:40px;background:rgba(28,58,43,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.ci-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:3px;}
+.ci-val{font-size:14px;color:var(--text);line-height:1.5;}
+.ci-val a{color:var(--green);font-weight:500;}
+.soc-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px;}
+.sbtn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:50px;font-size:13px;font-weight:500;transition:transform .25s,box-shadow .25s;}
+.sbtn:hover{transform:translateY(-2px);}
+.sb-call{background:var(--green);color:white;box-shadow:0 4px 14px rgba(28,58,43,.22);}
+.sb-call:hover{box-shadow:0 8px 22px rgba(28,58,43,.32);}
+.sb-wa{background:#25D366;color:white;}
+.sb-maps{background:var(--cream);color:var(--text);border:1px solid var(--border);}
+.sb-fb{background:#1877F2;color:white;}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{display:flex;flex-direction:column;gap:7px;}
+.fg label{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+.fg input,.fg textarea,.fg select{background:var(--cream);border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .3s,background .3s;resize:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--sage);background:white;}
+.btn-form{background:var(--green);color:var(--cream);border:none;padding:15px 34px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:500;cursor:none;transition:background .3s,transform .25s,box-shadow .3s;align-self:flex-start;box-shadow:0 6px 22px rgba(28,58,43,.2);}
+.btn-form:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(28,58,43,.3);}
+
+/* FOOTER */
+footer{background:var(--green);padding:46px 80px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+.f-logo{font-family:'Fraunces',serif;font-size:15px;font-weight:400;font-style:italic;color:var(--mint);}
+footer p{font-size:12px;color:rgba(255,255,255,.38);}
+.f-links{display:flex;gap:22px;}
+.f-links a{font-size:12px;color:rgba(255,255,255,.45);transition:color .25s;}
+.f-links a:hover{color:var(--mint);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:0 28px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{padding:120px 36px 60px;}
+  .hero-right{height:400px;}
+  .hero-pill-price{left:16px;bottom:16px;}
+  .intro-wrap,.systems-wrap{padding-left:36px;padding-right:36px;}
+  .intro-grid{grid-template-columns:1fr;gap:36px;}
+  .systems-grid{grid-template-columns:1fr 1fr;}
+  .treatments-section,.process-section,.pricing-section,.about-section,.reviews-section,.faq-section,.contact-section{padding-left:36px;padding-right:36px;}
+  .treat-grid{grid-template-columns:1fr 1fr;}
+  .process-grid::before{display:none;}
+  .pricing-inner{grid-template-columns:1fr;gap:40px;}
+  .about-section{grid-template-columns:1fr;}
+  .about-img-frame{height:360px;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .faq-section{grid-template-columns:1fr;gap:36px;}
+  .faq-left-h,.faq-left-p{position:static;}
+  .cta-banner{margin:0 36px 60px;padding:48px 36px;flex-direction:column;}
+  .contact-section{grid-template-columns:1fr;}
+  footer{padding:36px 36px;}
+}
+@media(max-width:640px){
+  .hero-left{padding:108px 22px 48px;}
+  .hero-right{height:280px;}
+  .intro-wrap,.systems-wrap{padding:60px 22px 0;}
+  .systems-wrap{padding:40px 22px 70px;}
+  .systems-grid{grid-template-columns:1fr;}
+  .treatments-section,.process-section,.pricing-section,.about-section,.reviews-section,.faq-section,.contact-section{padding-left:22px;padding-right:22px;}
+  .treat-grid{grid-template-columns:1fr;}
+  .process-grid{grid-template-columns:1fr;gap:40px;}
+  .treat-header{flex-direction:column;align-items:flex-start;}
+  .cta-banner{margin:0 22px 48px;padding:36px 24px;}
+  footer{padding:26px 22px;flex-direction:column;align-items:flex-start;}
+  .frow{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+
+<!-- FAB -->
+<div class="fab">
+  <a href="tel:0497283521" class="fab-btn fab-call">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+    Bel &amp; Boek
+  </a>
+  <a href="https://wa.me/0497283521?text=Hallo%2C%20ik%20wil%20een%20afspraak%20maken" class="fab-btn fab-wa" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">
+    <div class="nav-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+    </div>
+    <div class="nav-wordmark">Thai Therapie <em>Ninove</em></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#behandelingen">Behandelingen</a></li>
+    <li><a href="#over">Over One</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:0497283521" class="nav-cta-btn">📞 Bel Nu</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-badge reveal">Ninove · Elke dag 10:00 – 23:00</div>
+    <h1 class="hero-h1 reveal s1">
+      <em>Nuat Bumbad</em><br>
+      Thaise<br>
+      Therapeutische<br>
+      Massage
+    </h1>
+    <div class="hero-divider reveal s2"></div>
+    <p class="hero-desc reveal s2">Gerichte behandelingen voor spierklachten, spanning en herstel — in een rustige en professionele omgeving, volledig afgestemd op ú.</p>
+    <div class="hero-btns reveal s3">
+      <a href="tel:0497283521" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        Bel: 0497 28 35 21
+      </a>
+      <a href="https://wa.me/0497283521" class="btn-ghost" target="_blank">Afspraak via WhatsApp</a>
+    </div>
+    <div class="hero-trust reveal s4">
+      <div class="trust-stars">★★★★★</div>
+      <div class="trust-text"><strong>5.0 op Google</strong> · Tevreden klanten in Ninove</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1200&q=85" alt="Thai massage therapie Ninove" loading="eager">
+    <div class="hero-overlay"></div>
+    <div class="hero-open">
+      <div class="open-dot"></div>
+      Vandaag open
+    </div>
+    <div class="hero-pill-price">
+      <div class="pill-price"><sup>€</sup>60</div>
+      <div class="pill-label">per behandeling · 60 min</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track" aria-hidden="true">
+    <div class="m-item"><span class="m-icon">🧠</span><span class="m-strong">Zenuwstelsel</span><span class="m-sep">·</span><span class="m-light">Innerlijke rust</span></div>
+    <div class="m-item"><span class="m-icon">🦴</span><span class="m-strong">Botten &amp; Gewrichten</span><span class="m-sep">·</span><span class="m-light">Mobiliteit</span></div>
+    <div class="m-item"><span class="m-icon">💪</span><span class="m-strong">Spierstelsel</span><span class="m-sep">·</span><span class="m-light">Spanningen &amp; herstel</span></div>
+    <div class="m-item"><span class="m-icon">🌿</span><span class="m-strong">Fascia &amp; Pezen</span><span class="m-sep">·</span><span class="m-light">Bewegingsvrijheid</span></div>
+    <div class="m-item"><span class="m-icon">📅</span><span class="m-strong">Elke dag open</span><span class="m-sep">·</span><span class="m-light">10:00 – 23:00</span></div>
+    <div class="m-item"><span class="m-icon">⭐</span><span class="m-strong">5★ Google Reviews</span><span class="m-sep">·</span><span class="m-light">Tevreden klanten</span></div>
+    <!-- duplicate -->
+    <div class="m-item"><span class="m-icon">🧠</span><span class="m-strong">Zenuwstelsel</span><span class="m-sep">·</span><span class="m-light">Innerlijke rust</span></div>
+    <div class="m-item"><span class="m-icon">🦴</span><span class="m-strong">Botten &amp; Gewrichten</span><span class="m-sep">·</span><span class="m-light">Mobiliteit</span></div>
+    <div class="m-item"><span class="m-icon">💪</span><span class="m-strong">Spierstelsel</span><span class="m-sep">·</span><span class="m-light">Spanningen &amp; herstel</span></div>
+    <div class="m-item"><span class="m-icon">🌿</span><span class="m-strong">Fascia &amp; Pezen</span><span class="m-sep">·</span><span class="m-light">Bewegingsvrijheid</span></div>
+    <div class="m-item"><span class="m-icon">📅</span><span class="m-strong">Elke dag open</span><span class="m-sep">·</span><span class="m-light">10:00 – 23:00</span></div>
+    <div class="m-item"><span class="m-icon">⭐</span><span class="m-strong">5★ Google Reviews</span><span class="m-sep">·</span><span class="m-light">Tevreden klanten</span></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-wrap">
+  <div class="intro-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Welkom</div>
+      <h2 class="intro-h">Rust, zorg en <em>aandacht</em> voor uw lichaam</h2>
+    </div>
+    <div class="reveal s2">
+      <div class="intro-body">
+        <p>Welkom in een omgeving waar <strong>rust, zorg en aandacht voor het lichaam</strong> centraal staan. We nemen bewust de tijd om u te ontvangen in een warme, ontspannen sfeer, zodat u kunt loskomen van de drukte van alledag.</p>
+        <p>Elke behandeling wordt met zorg afgestemd op uw lichaam en uw persoonlijke noden. Of u nu komt voor ontspanning, herstel of verlichting van spierklachten — u mag rekenen op een professionele aanpak in een kalme en respectvolle omgeving.</p>
+      </div>
+      <a href="#contact" class="intro-link">Maak een afspraak →</a>
+    </div>
+  </div>
+</div>
+
+<!-- BODY SYSTEMS -->
+<div class="systems-wrap">
+  <div class="systems-grid">
+    <div class="sys-card reveal s1"><div class="sys-num">01</div><div class="sys-icon">🧠</div><div class="sys-title">Zenuwstelsel</div><div class="sys-desc">Voor innerlijke rust en emotionele balans in het dagelijks leven.</div></div>
+    <div class="sys-card reveal s2"><div class="sys-num">02</div><div class="sys-icon">🦴</div><div class="sys-title">Botten &amp; Gewrichten</div><div class="sys-desc">Zachte mobilisatie en ondersteuning van uw lichaamshouding.</div></div>
+    <div class="sys-card reveal s3"><div class="sys-num">03</div><div class="sys-icon">💪</div><div class="sys-title">Spierstelsel</div><div class="sys-desc">Duurzame aanpak van spanningen en hardnekkige spierklachten.</div></div>
+    <div class="sys-card reveal s4"><div class="sys-num">04</div><div class="sys-icon">🌿</div><div class="sys-title">Fascia &amp; Pezen</div><div class="sys-desc">Meer bewegingsvrijheid en lichtheid in het dagelijks leven.</div></div>
+  </div>
+</div>
+
+<!-- TREATMENTS -->
+<section class="treatments-section" id="behandelingen">
+  <div class="treat-header reveal">
+    <div class="treat-header-left">
+      <div class="section-eyebrow">Populaire behandelingen</div>
+      <h2 class="treat-h">De massages die het <em>vaakst gekozen</em> worden</h2>
+    </div>
+    <a href="tel:0497283521" class="btn-primary" style="white-space:nowrap;flex-shrink:0;">📞 Direct boeken</a>
+  </div>
+  <div class="treat-grid">
+    <div class="treat-card reveal s1">
+      <div class="treat-img-wrap">
+        <img class="treat-img" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=700&q=85" alt="Traditionele Thaise Massage" loading="lazy">
+        <div class="treat-overlay"></div>
+        <div class="treat-badge">01</div>
+      </div>
+      <div class="treat-body">
+        <div class="treat-name">Traditionele<br>Thaise Massage</div>
+        <div class="treat-desc">Stevig en diepwerkend. Helpt het lichaam losmaken en de doorstroming stimuleren. Ideaal bij vastzittende spieren en vermoeidheid.</div>
+        <div class="treat-price">60 min · €60</div>
+      </div>
+    </div>
+    <div class="treat-card reveal s2">
+      <div class="treat-img-wrap">
+        <img class="treat-img" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=700&q=85" alt="Ayurvedische Massage" loading="lazy">
+        <div class="treat-overlay"></div>
+        <div class="treat-badge">02</div>
+      </div>
+      <div class="treat-body">
+        <div class="treat-name">Ayurvedische<br>Massage</div>
+        <div class="treat-desc">Warm en rustgevend. Brengt lichaam en geest opnieuw in balans. Ondersteunt ontspanning en een diep gevoel van welzijn.</div>
+        <div class="treat-price">60 min · €60</div>
+      </div>
+    </div>
+    <div class="treat-card reveal s3">
+      <div class="treat-img-wrap">
+        <img class="treat-img" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=700&q=85" alt="Ontspanningsmassage" loading="lazy">
+        <div class="treat-overlay"></div>
+        <div class="treat-badge">03</div>
+      </div>
+      <div class="treat-body">
+        <div class="treat-name">Ontspannings-<br>massage</div>
+        <div class="treat-desc">Zacht en kalmerend. Laat stress los en kom volledig tot rust. Perfect voor hernieuwde energie.</div>
+        <div class="treat-price">60 min · €60</div>
+      </div>
+    </div>
+    <div class="treat-card reveal s4">
+      <div class="treat-img-wrap">
+        <img class="treat-img" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=700&q=85" alt="Sportmassage" loading="lazy">
+        <div class="treat-overlay"></div>
+        <div class="treat-badge">04</div>
+      </div>
+      <div class="treat-body">
+        <div class="treat-name">Sport-<br>massage</div>
+        <div class="treat-desc">Gericht op spierherstel na inspanning. Geschikt voor sporters of bij overbelasting en stijve spieren.</div>
+        <div class="treat-price">60 min · €60</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-header reveal">
+    <div class="section-eyebrow">Zo werkt het</div>
+    <h2 class="process-h">Een moment van <em>rust, warmte</em><br>en professionele zorg</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal s1">
+      <div class="step-circle"><div class="step-n">01</div><div class="step-badge">🗣</div></div>
+      <div class="step-title">Intake</div>
+      <div class="step-desc">Een korte bespreking van uw klachten, wensen en aandachtspunten — zodat de behandeling volledig op u afgestemd wordt.</div>
+    </div>
+    <div class="process-step reveal s2">
+      <div class="step-circle"><div class="step-n">02</div><div class="step-badge">🙌</div></div>
+      <div class="step-title">Behandeling</div>
+      <div class="step-desc">Gerichte massage met focus op probleemzones, spierontspanning en het herstellen van balans in het lichaam.</div>
+    </div>
+    <div class="process-step reveal s3">
+      <div class="step-circle"><div class="step-n">03</div><div class="step-badge">💬</div></div>
+      <div class="step-title">Advies</div>
+      <div class="step-desc">Persoonlijk advies na de behandeling om het effect te ondersteunen en te verlengen in het dagelijks leven.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="tarieven">
+  <div class="pricing-inner">
+    <div class="pricing-left reveal">
+      <div class="section-eyebrow">Tarieven</div>
+      <h2>Helder geprijsd,<br><em>puur vakmanschap</em></h2>
+      <p>Kies de duur die het best bij u past en geniet van een behandeling volledig afgestemd op uw lichaam en noden. Geen verborgen kosten, transparante tarieven.</p>
+    </div>
+    <div class="pricing-card reveal s2">
+      <div class="price-big"><sup>€</sup>60</div>
+      <div class="price-dur">Per behandeling · 60 minuten</div>
+      <div class="price-perks">
+        <div class="price-perk"><div class="perk-check">✓</div>Persoonlijke intake vooraf</div>
+        <div class="price-perk"><div class="perk-check">✓</div>Keuze uit 4 behandelingen</div>
+        <div class="price-perk"><div class="perk-check">✓</div>Professionele &amp; rustige omgeving</div>
+        <div class="price-perk"><div class="perk-check">✓</div>Advies na de behandeling</div>
+      </div>
+      <a href="https://wa.me/0497283521?text=Hallo%2C%20ik%20wil%20een%20behandeling%20boeken" class="btn-book" target="_blank">Behandeling boeken via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="over">
+  <div class="about-visual reveal">
+    <div class="about-bubble"></div>
+    <div class="about-img-frame">
+      <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=900&q=85" alt="Thai massage therapeute One" loading="lazy">
+    </div>
+    <div class="about-float">
+      <div class="about-float-num">5★</div>
+      <div class="about-float-lbl">Google Reviews</div>
+    </div>
+  </div>
+  <div class="about-text reveal s2">
+    <div class="section-eyebrow">Over de therapeute</div>
+    <div class="about-name">One</div>
+    <div class="about-role">Thaise Massage Therapeute · Ninove</div>
+    <div class="about-body">
+      <p>Mijn naam is One en ik ontvang u graag in een rustige en vertrouwde omgeving waar uw welzijn centraal staat.</p>
+      <p>Met jarenlange ervaring in traditionele Thaise massage combineer ik vakkennis met een persoonlijke, zorgzame aanpak. Elke behandeling wordt afgestemd op wat u op dat moment nodig heeft.</p>
+      <p><strong>Voor mij is massage meer dan ontspanning alleen</strong> — het is een manier om lichaam en geest opnieuw in balans te brengen, met respect voor uw grenzen en oprechte zorg voor uw comfort.</p>
+    </div>
+    <div class="about-cta-wrap">
+      <a href="tel:0497283521" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        Bel: 0497 28 35 21
+      </a>
+    </div>
+    <div class="about-hours">
+      <div class="hours-lbl">📅 Openingstijden</div>
+      <div class="hour-row"><span class="hr-d">Maandag – Vrijdag</span><span class="hr-t">10:00 – 23:00</span></div>
+      <div class="hour-row"><span class="hr-d">Zaterdag</span><span class="hr-t">10:00 – 23:00</span></div>
+      <div class="hour-row"><span class="hr-d">Zondag</span><span class="hr-t">10:00 – 23:00</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="reviews-header reveal">
+    <div class="section-eyebrow">Reviews</div>
+    <h2 class="reviews-h">Wat klanten over ons <em>zeggen</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal s1">
+      <div class="rv-quote">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Ik heb al een hele tijd last van nek-, schouder- en rugpijn. Ik was hier binnen 2 uur en de pijn was meteen verlicht. Dank u voor uw uitstekende werk.</p>
+      <div class="rv-author"><div class="rv-av">K</div><div><div class="rv-name">Kwanruan L.</div><div class="rv-src">Google Review</div></div></div>
+    </div>
+    <div class="review-card reveal s2">
+      <div class="rv-quote">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Na de behandeling voelde mijn lichaam merkbaar lichter en ontspannen aan. Er werd echt geluisterd naar mijn klachten. Een rustige, professionele aanpak. Absoluut een aanrader.</p>
+      <div class="rv-author"><div class="rv-av">H</div><div><div class="rv-name">Hans</div><div class="rv-src">Google Review</div></div></div>
+    </div>
+    <div class="review-card reveal s3">
+      <div class="rv-quote">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Very nice place with a therapist with great experience in massage. A calm, professional setting and a treatment tailored to my needs. Absolutely recommended.</p>
+      <div class="rv-author"><div class="rv-av">D</div><div><div class="rv-name">Daniel A.</div><div class="rv-src">Google Review</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-left reveal">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="faq-left-h">Veelgestelde <em>vragen</em></h2>
+    <p class="faq-left-p">Staat uw vraag er niet bij? Neem dan gerust contact op — we helpen u graag verder.</p>
+  </div>
+  <div class="faq-list reveal s2">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Moet ik ervaring hebben met massage?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a"><p>Nee, helemaal niet. Elke behandeling wordt aangepast aan uw comfort en ervaring, of het nu uw eerste massage is of niet.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is de massage pijnlijk?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a"><p>De massage wordt afgestemd op uw lichaam en uw grenzen. We werken gericht, maar altijd met respect voor wat voor u aangenaam aanvoelt.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Moet ik op voorhand iets voorbereiden?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a"><p>Nee, u hoeft niets speciaals te doen. Kom gewoon op tijd en geef eventuele klachten of aandachtspunten vooraf even door.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Kan ik ook terecht met specifieke klachten?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a"><p>Ja. Veel behandelingen zijn geschikt bij spanningen, stijve spieren of lichamelijke klachten. Samen bekijken we wat voor u het meest aangewezen is.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe maak ik een afspraak?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a"><p>U kunt bellen of een WhatsApp-bericht sturen naar 0497 28 35 21. Of gebruik het contactformulier onderaan deze pagina.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner reveal">
+  <div class="cta-content">
+    <div class="section-eyebrow">Klaar voor rust?</div>
+    <h2 class="cta-h">Voelt u stress, spanningen<br>of <em>vermoeidheid</em>?</h2>
+    <p class="cta-p">Een gerichte massage helpt uw lichaam herstellen en brengt u opnieuw tot rust.</p>
+  </div>
+  <div class="cta-btns">
+    <a href="tel:0497283521" class="btn-primary">📞 Bel: 0497 28 35 21</a>
+    <a href="https://wa.me/0497283521" class="btn-ghost" target="_blank">WhatsApp boeken</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="reveal">
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="contact-h">Neem <em>contact</em> op</h2>
+    <div class="ci-row"><div class="ci-ico">📞</div><div><div class="ci-lbl">Telefoon &amp; WhatsApp</div><div class="ci-val"><a href="tel:0497283521">0497 28 35 21</a></div></div></div>
+    <div class="ci-row"><div class="ci-ico">📍</div><div><div class="ci-lbl">Adres</div><div class="ci-val">Denderhoutembaan 11/1<br>9400 Ninove, België</div></div></div>
+    <div class="ci-row"><div class="ci-ico">🕙</div><div><div class="ci-lbl">Openingstijden</div><div class="ci-val">Maandag t/m zondag · 10:00 – 23:00</div></div></div>
+    <div class="soc-row">
+      <a href="tel:0497283521" class="sbtn sb-call">📞 Bel Nu</a>
+      <a href="https://wa.me/0497283521" class="sbtn sb-wa" target="_blank">💬 WhatsApp</a>
+      <a href="https://maps.google.com/?q=Denderhoutembaan+11+9400+Ninove" class="sbtn sb-maps" target="_blank">📍 Maps</a>
+      <a href="https://facebook.com" class="sbtn sb-fb" target="_blank">Facebook</a>
+    </div>
+  </div>
+  <form class="contact-form reveal s2" onsubmit="sendForm(event)">
+    <div class="frow">
+      <div class="fg"><label>Uw naam</label><input type="text" id="cName" placeholder="Jan Janssen" required></div>
+      <div class="fg"><label>Telefoonnummer</label><input type="tel" id="cPhone" placeholder="0497 ..." required></div>
+    </div>
+    <div class="fg">
+      <label>Gewenste behandeling</label>
+      <select id="cService">
+        <option value="">— Kies een massage —</option>
+        <option>Traditionele Thaise Massage</option>
+        <option>Ayurvedische Massage</option>
+        <option>Ontspanningsmassage</option>
+        <option>Sportmassage</option>
+      </select>
+    </div>
+    <div class="fg"><label>Bericht (optioneel)</label><textarea id="cMsg" rows="4" placeholder="Uw klachten of gewenste tijdstip..."></textarea></div>
+    <button type="submit" class="btn-form">Stuur via WhatsApp →</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Thai Therapie Massage Ninove</div>
+  <p>Denderhoutembaan 11/1 · 9400 Ninove · Elke dag 10:00–23:00</p>
+  <div class="f-links">
+    <a href="tel:0497283521">0497 28 35 21</a>
+    <a href="https://thaimassagetherapyninove.com/privacybeleid/" target="_blank">Privacybeleid</a>
+  </div>
+</footer>
+
+<script>
+/* Custom cursor */
+const dot=document.getElementById('cDot'), ring=document.getElementById('cRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+/* Nav scroll */
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+/* Reveal on scroll */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* FAQ */
+function toggleFaq(btn){
+  const item=btn.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+
+/* Contact form */
+function sendForm(e){
+  e.preventDefault();
+  const n=document.getElementById('cName').value;
+  const p=document.getElementById('cPhone').value;
+  const s=document.getElementById('cService').value;
+  const m=document.getElementById('cMsg').value;
+  const txt=encodeURIComponent(`Hallo, mijn naam is ${n}. Ik wil een afspraak maken${s?' voor '+s:''}. Mijn nummer: ${p}${m?'. '+m:''}`);
+  window.open(`https://wa.me/0497283521?text=${txt}`,'_blank');
+}
+</script>
+</body>
+</html>

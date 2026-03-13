@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thai Therapie Massage Ninove</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --dark: #0D0D0B;
+    --dark2: #141410;
+    --dark3: #1C1C18;
+    --cream: #F5F0E8;
+    --text-muted: #8A8A7A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* FLOATING CTA */
+  .float-cta {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .float-call {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 14px 24px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 8px 32px rgba(201,169,110,0.35);
+  }
+  .float-call:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 22px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(13,13,11,0.95), transparent);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,169,110,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 60%);
+  }
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(201,169,110,0.04) 80px);
+  }
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 40px;
+    animation: fadeUp 1.2s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 90px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    margin-bottom: 50px;
+    line-height: 1.8;
+  }
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 30px auto;
+    opacity: 0.5;
+  }
+  .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 16px 36px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(201,169,110,0.4);
+    color: var(--gold-light);
+    padding: 16px 36px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,169,110,0.05); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+
+  /* SERVICES */
+  .services {
+    padding: 120px 60px;
+    background: var(--dark2);
+  }
+  .section-header { text-align: center; margin-bottom: 72px; }
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .service-card {
+    border: 1px solid rgba(201,169,110,0.12);
+    transition: transform 0.4s, box-shadow 0.4s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(201,169,110,0.12); border-color: rgba(201,169,110,0.3); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+    transform-origin: left;
+    z-index: 2;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: rgba(201,169,110,0.04); }
+  .service-img {
+    width: 100%; height: 220px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%) brightness(0.85);
+    transition: filter 0.5s, transform 0.5s;
+  }
+  .service-card:hover .service-img { filter: grayscale(0%) brightness(0.95); transform: scale(1.04); }
+  .service-img-wrap { overflow: hidden; flex-shrink: 0; }
+  .service-card-body { padding: 32px 28px 28px; }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: rgba(201,169,110,0.15);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .service-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .service-price {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-text .section-eyebrow { text-align: left; }
+  .about-text .section-title { text-align: left; }
+  .about-body {
+    margin-top: 28px;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-muted);
+  }
+  .about-body p { margin-bottom: 16px; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(201,169,110,0.15);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-card {
+    background: var(--dark3);
+    border: 1px solid rgba(201,169,110,0.12);
+    padding: 60px 48px;
+    position: relative;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 40px;
+    width: 60px; height: 2px;
+    background: var(--gold);
+  }
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.5;
+    margin-bottom: 32px;
+  }
+  .about-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hour-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .hour-row .day { color: var(--text-muted); letter-spacing: 1px; }
+  .hour-row .time { color: var(--gold-light); }
+  .open-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* PROCESS */
+  .process {
+    padding: 120px 60px;
+    background: var(--dark3);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    max-width: 1000px;
+    margin: 72px auto 0;
+  }
+  .process-step {
+    text-align: center;
+    position: relative;
+  }
+  .process-step::after {
+    content: '—';
+    position: absolute;
+    right: -26px;
+    top: 20px;
+    color: rgba(201,169,110,0.3);
+    font-size: 20px;
+  }
+  .process-step:last-child::after { display: none; }
+  .step-num {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(201,169,110,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+  /* TESTIMONIAL */
+  .testimonial {
+    padding: 100px 60px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(201,169,110,0.05) 0%, transparent 50%, rgba(201,169,110,0.03) 100%);
+    border-top: 1px solid rgba(201,169,110,0.08);
+    border-bottom: 1px solid rgba(201,169,110,0.08);
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    max-width: 780px;
+    margin: 24px auto;
+    line-height: 1.5;
+  }
+  .testimonial-author { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+  .stars { color: var(--gold); font-size: 14px; letter-spacing: 3px; margin-bottom: 16px; }
+
+  /* CONTACT */
+  .contact-section {
+    padding: 120px 60px;
+    background: var(--dark2);
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .contact-info { padding-top: 20px; }
+  .contact-block { margin-bottom: 40px; }
+  .contact-block .label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .contact-block .value {
+    font-size: 15px;
+    color: var(--cream);
+    line-height: 1.6;
+  }
+  .social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-btn:hover {
+    border-color: var(--gold);
+    background: rgba(201,169,110,0.06);
+    color: var(--gold);
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 0; }
+  .form-row { position: relative; margin-bottom: 24px; }
+  .form-row input,
+  .form-row textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+    padding: 16px 0;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+  .form-row input:focus,
+  .form-row textarea:focus { border-color: var(--gold); }
+  .form-row label {
+    position: absolute;
+    top: 16px; left: 0;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .form-row input:focus + label,
+  .form-row input:not(:placeholder-shown) + label,
+  .form-row textarea:focus + label,
+  .form-row textarea:not(:placeholder-shown) + label {
+    top: -10px; font-size: 9px; color: var(--gold);
+  }
+  .form-row input::placeholder,
+  .form-row textarea::placeholder { color: transparent; }
+  .btn-submit {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 18px 48px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-self: flex-start;
+    margin-top: 16px;
+  }
+  .btn-submit:hover { background: var(--gold); color: var(--dark); }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid rgba(201,169,110,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  footer .footer-copy { font-size: 11px; color: var(--text-muted); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 24px; }
+    .services { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .service-card { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.12); }
+    .about { padding: 80px 24px; grid-template-columns: 1fr; gap: 48px; }
+    .process { padding: 80px 24px; }
+    .process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .process-step::after { display: none; }
+    .contact-section { padding: 80px 24px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating CTA -->
+<div class="float-cta">
+  <a href="tel:0497283521" class="float-call">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+    Bel & Boek Nu
+  </a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="logo">Thai Therapie · Ninove</a>
+  <ul class="nav-links">
+    <li><a href="#services">Behandelingen</a></li>
+    <li><a href="#about">Over One</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Traditionele Thaise Therapeutische Massage — Ninove</p>
+    <h1>Rust voor<br><em>Lichaam & Geest</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Gerichte behandelingen voor spierklachten, spanning en herstel<br>Elke dag open · 10:00 – 23:00</p>
+    <div class="hero-cta-group">
+      <a href="tel:0497283521" class="btn-gold">☎ Bel Nu: 0497 28 35 21</a>
+      <a href="https://wa.me/0497283521" class="btn-outline">WhatsApp Boek</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="section-header">
+    <span class="section-eyebrow">Onze Behandelingen</span>
+    <h2 class="section-title">Kies uw <em>massage</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img class="service-img" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80" alt="Traditionele Thaise Massage" loading="lazy">
+      </div>
+      <div class="service-card-body">
+        <div class="service-num">01</div>
+        <h3 class="service-name">Traditionele Thaise Massage</h3>
+        <p class="service-desc">Een stevige en diepwerkende massage die het lichaam helpt losmaken. Ideaal bij vastzittende spieren en vermoeidheid.</p>
+        <p class="service-price">60 min · €60</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img class="service-img" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80" alt="Ayurvedische Massage" loading="lazy">
+      </div>
+      <div class="service-card-body">
+        <div class="service-num">02</div>
+        <h3 class="service-name">Ayurvedische Massage</h3>
+        <p class="service-desc">Een warme, rustgevende massage die lichaam en geest opnieuw in balans brengt. Diepe ontspanning en innerlijke rust.</p>
+        <p class="service-price">60 min · €60</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img class="service-img" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80" alt="Ontspanningsmassage" loading="lazy">
+      </div>
+      <div class="service-card-body">
+        <div class="service-num">03</div>
+        <h3 class="service-name">Ontspanningsmassage</h3>
+        <p class="service-desc">Een zachte en kalmerende massage om stress los te laten en volledig tot rust te komen. Hernieuwde energie.</p>
+        <p class="service-price">60 min · €60</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-img-wrap">
+        <img class="service-img" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Sportmassage" loading="lazy">
+      </div>
+      <div class="service-card-body">
+        <div class="service-num">04</div>
+        <h3 class="service-name">Sportmassage</h3>
+        <p class="service-desc">Gericht op spierherstel en het verminderen van spanning na inspanning. Geschikt voor sporters en bij overbelasting.</p>
+        <p class="service-price">60 min · €60</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about">
+    <div class="about-text">
+      <span class="section-eyebrow">Over de Therapeute</span>
+      <h2 class="section-title">Welkom bij <em>One</em></h2>
+      <div class="about-body">
+        <p>Mijn naam is One en ik ontvang u graag in een rustige en vertrouwde omgeving waar uw welzijn centraal staat.</p>
+        <p>Met jarenlange ervaring in traditionele Thaise massage combineer ik vakkennis met een persoonlijke, zorgzame aanpak. Elke behandeling wordt afgestemd op uw lichaam en wat u op dat moment nodig heeft.</p>
+      </div>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">7</div>
+          <div class="stat-label">Jaar Ervaring</div>
+        </div>
+        <div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">Behandelingen</div>
+        </div>
+        <div>
+          <div class="stat-num">365</div>
+          <div class="stat-label">Dagen Per Jaar</div>
+        </div>
+        <div>
+          <div class="stat-num">5★</div>
+          <div class="stat-label">Google Reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="open-badge">Nu Open</div>
+        <p class="about-quote">"Rust voor uw lichaam. Zorg voor uw spieren."</p>
+        <div class="about-hours">
+          <div class="hour-row">
+            <span class="day">Maandag – Vrijdag</span>
+            <span class="time">10:00 – 23:00</span>
+          </div>
+          <div class="hour-row">
+            <span class="day">Zaterdag – Zondag</span>
+            <span class="time">10:00 – 23:00</span>
+          </div>
+          <div class="hour-row">
+            <span class="day">Feestdagen</span>
+            <span class="time">10:00 – 23:00</span>
+          </div>
+        </div>
+        <br>
+        <a href="tel:0497283521" class="btn-gold" style="display:inline-block; margin-top:12px;">Bel: 0497 28 35 21</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process" id="process">
+  <div class="section-header">
+    <span class="section-eyebrow">Hoe Werkt Het</span>
+    <h2 class="section-title">In <em>drie stappen</em> tot rust</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Intake</h3>
+      <p class="step-desc">We starten met een korte bespreking van uw klachten en wensen, zodat de behandeling volledig op u afgestemd kan worden.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Behandeling</h3>
+      <p class="step-desc">De massage wordt gericht uitgevoerd, met focus op probleemzones, spierontspanning en het herstellen van balans.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Advies</h3>
+      <p class="step-desc">Na de behandeling geven we persoonlijk advies om het effect van de massage te ondersteunen en te verlengen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="testimonial">
+  <span class="section-eyebrow">Wat Klanten Zeggen</span>
+  <div class="stars">★★★★★</div>
+  <p class="testimonial-text">"Ik heb al een hele tijd last van nek-, schouder- en rugpijn. Ik was hier binnen 2 uur en de pijn was meteen verlicht. Dank u voor uw uitstekende werk."</p>
+  <p class="testimonial-author">— Kwanruan L., Google Review</p>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div style="text-align:center; margin-bottom:72px;">
+    <span class="section-eyebrow">Maak Een Afspraak</span>
+    <h2 class="section-title">Neem <em>Contact</em> Op</h2>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="contact-block">
+        <div class="label">Telefoon &amp; WhatsApp</div>
+        <div class="value"><a href="tel:0497283521" style="color:var(--gold-light);text-decoration:none;">0497 28 35 21</a></div>
+      </div>
+      <div class="contact-block">
+        <div class="label">Adres</div>
+        <div class="value">Denderhoutembaan 11/1<br>9400 Ninove, België</div>
+      </div>
+      <div class="contact-block">
+        <div class="label">Openingstijden</div>
+        <div class="value">Elke dag · 10:00 – 23:00</div>
+      </div>
+      <div class="social-links">
+        <a href="tel:0497283521" class="social-btn">📞 Bel Nu</a>
+        <a href="https://wa.me/0497283521" class="social-btn">💬 WhatsApp</a>
+        <a href="https://maps.google.com/?q=Denderhoutembaan+11/1+9400+Ninove" class="social-btn" target="_blank">📍 Maps</a>
+        <a href="https://facebook.com" class="social-btn" target="_blank">Facebook</a>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" id="name" placeholder="Naam" required>
+          <label for="name">Naam</label>
+        </div>
+        <div class="form-row">
+          <input type="tel" id="phone" placeholder="Telefoonnummer" required>
+          <label for="phone">Telefoonnummer</label>
+        </div>
+        <div class="form-row">
+          <input type="text" id="service" placeholder="Welke massage?">
+          <label for="service">Gewenste Massage</label>
+        </div>
+        <div class="form-row">
+          <textarea id="message" placeholder="Bericht" rows="4"></textarea>
+          <label for="message">Bericht (optioneel)</label>
+        </div>
+        <button type="submit" class="btn-submit">Stuur Bericht</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Thai Therapie Massage · Ninove</span>
+  <span class="footer-copy">© 2026 · Denderhoutembaan 11/1, 9400 Ninove</span>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const service = document.getElementById('service').value;
+  const msg = encodeURIComponent(`Hallo, ik ben ${name}. Ik wil een afspraak maken${service ? ' voor ' + service : ''}. Mijn nummer: ${phone}`);
+  window.open(`https://wa.me/0497283521?text=${msg}`, '_blank');
+}
+</script>
+
+</body>
+</html>

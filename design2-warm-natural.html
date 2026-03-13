@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thai Therapie Massage Ninove</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7A8C76;
+    --sage-light: #C5D1C0;
+    --terracotta: #C4745A;
+    --terracotta-light: #E8A892;
+    --cream: #F7F2EA;
+    --cream2: #EDE7DC;
+    --warm-dark: #2A2620;
+    --warm-mid: #4A4238;
+    --warm-text: #6B5F52;
+    --linen: #FAF7F2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--linen);
+    color: var(--warm-dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* Floating CTA */
+  .float-cta {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+  }
+  .float-call {
+    background: var(--terracotta);
+    color: white;
+    padding: 16px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(196,116,90,0.4);
+    transition: all 0.3s;
+  }
+  .float-call:hover { background: #B5634A; transform: translateY(-3px); box-shadow: 0 12px 40px rgba(196,116,90,0.5); }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,140,118,0.15);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--warm-dark);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .logo span { color: var(--terracotta); }
+  .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--warm-text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-cta {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 500 !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: #B5634A !important; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    background: var(--cream2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-circle {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,116,90,0.08) 0%, transparent 70%);
+    right: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .hero-bg-dots {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(rgba(122,140,118,0.2) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+  }
+  .hero-left { position: relative; z-index: 2; padding-right: 40px; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(122,140,118,0.15);
+    color: var(--sage);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 32px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--sage);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--warm-dark);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .hero p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--warm-text);
+    margin-bottom: 40px;
+    max-width: 440px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-terra {
+    background: var(--terracotta);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 6px 24px rgba(196,116,90,0.3);
+  }
+  .btn-terra:hover { background: #B5634A; transform: translateY(-2px); }
+  .btn-sage {
+    background: transparent;
+    color: var(--sage);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--sage-light);
+    transition: all 0.3s;
+  }
+  .btn-sage:hover { background: var(--sage); color: white; border-color: var(--sage); }
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .hero-card-stack { position: relative; width: 360px; height: 480px; }
+  .hcard {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(42,38,32,0.1);
+  }
+  .hcard-main {
+    width: 320px;
+    top: 40px;
+    right: 0;
+    background: var(--warm-dark);
+    color: white;
+  }
+  .hcard-main .big-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--terracotta-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hcard-main .label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+  .hcard-main .desc { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 24px; }
+  .hcard-main .open-pill {
+    display: inline-block;
+    background: rgba(196,116,90,0.2);
+    color: var(--terracotta-light);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .hcard-float {
+    width: 200px;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 2;
+  }
+  .hcard-float .mini-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--warm-text);
+    margin-bottom: 12px;
+  }
+  .stars-sm { color: var(--terracotta); font-size: 14px; margin-bottom: 6px; }
+  .hcard-float .review { font-size: 12px; color: var(--warm-text); line-height: 1.5; font-style: italic; }
+  .hcard-float2 {
+    width: 160px;
+    bottom: 40px;
+    left: 20px;
+    text-align: center;
+    background: var(--cream);
+    z-index: 2;
+  }
+  .hcard-float2 .icon { font-size: 28px; margin-bottom: 8px; }
+  .hcard-float2 .ft { font-size: 11px; color: var(--warm-text); }
+
+  /* Services */
+  .services { padding: 100px 60px; background: var(--linen); }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--terracotta); }
+  .section-h { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 400; line-height: 1.15; color: var(--warm-dark); margin-bottom: 60px; }
+  .section-h em { font-style: italic; color: var(--terracotta); }
+  .services-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .svc {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(122,140,118,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  .svc:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,38,32,0.12); }
+  .svc-img {
+    width: 100%; height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .svc:hover .svc-img { transform: scale(1.04); }
+  .svc-img-wrap { overflow: hidden; }
+  .svc-body {
+    padding: 28px 28px 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .svc-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    background: rgba(196,116,90,0.1);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .svc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 10px;
+  }
+  .svc-desc { font-size: 13px; color: var(--warm-text); line-height: 1.7; margin-bottom: 16px; }
+  .svc-price {
+    display: inline-block;
+    background: rgba(196,116,90,0.12);
+    color: var(--terracotta);
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .services-cta { text-align: center; margin-top: 48px; }
+
+  /* About */
+  .about {
+    padding: 100px 60px;
+    background: var(--cream2);
+  }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .about-card-wrap { position: relative; }
+  .about-big-card {
+    background: var(--warm-dark);
+    border-radius: 24px;
+    padding: 52px 44px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-big-card::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 160px;
+    color: rgba(196,116,90,0.15);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .about-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--terracotta-light);
+    margin-bottom: 4px;
+  }
+  .about-role { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+  .about-big-card p { font-size: 14px; line-height: 1.85; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+  .about-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.4;
+    box-shadow: 0 8px 24px rgba(196,116,90,0.4);
+  }
+  .about-info h3 { font-family: 'Playfair Display', serif; font-size: 38px; line-height: 1.1; margin-bottom: 24px; }
+  .about-info h3 em { font-style: italic; color: var(--terracotta); }
+  .about-info p { font-size: 14px; line-height: 1.9; color: var(--warm-text); margin-bottom: 20px; }
+  .hours-box {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 32px;
+    border: 1px solid rgba(122,140,118,0.15);
+  }
+  .hours-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
+  .hour-r { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(122,140,118,0.1); font-size: 13px; }
+  .hour-r:last-child { border-bottom: none; }
+  .hour-r .d { color: var(--warm-text); }
+  .hour-r .t { color: var(--warm-dark); font-weight: 500; }
+
+  /* Reviews */
+  .reviews { padding: 80px 60px; background: var(--linen); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 48px auto 0; }
+  .review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid rgba(122,140,118,0.1);
+  }
+  .review-stars { color: var(--terracotta); font-size: 14px; margin-bottom: 16px; }
+  .review-text { font-size: 14px; color: var(--warm-text); line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+  .review-author { font-size: 12px; font-weight: 500; color: var(--warm-dark); }
+
+  /* Contact */
+  .contact-section { padding: 100px 60px; background: var(--cream2); }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .contact-left h3 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; margin-bottom: 32px; }
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .info-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background: rgba(196,116,90,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .info-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--sage); margin-bottom: 4px; }
+  .info-val { font-size: 14px; color: var(--warm-dark); }
+  .social-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
+  .sbtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .sbtn-call { background: var(--terracotta); color: white; box-shadow: 0 4px 16px rgba(196,116,90,0.3); }
+  .sbtn-call:hover { background: #B5634A; }
+  .sbtn-wa { background: #25D366; color: white; }
+  .sbtn-wa:hover { background: #1DB954; }
+  .sbtn-map { background: white; color: var(--warm-dark); border: 1px solid rgba(122,140,118,0.2); }
+  .sbtn-map:hover { background: var(--cream2); }
+  .sbtn-fb { background: #1877F2; color: white; }
+  .sbtn-fb:hover { background: #0D6EE0; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 12px; font-weight: 500; color: var(--warm-text); letter-spacing: 0.5px; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: white;
+    border: 1.5px solid rgba(122,140,118,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--warm-dark);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--terracotta); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .btn-form-submit {
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 24px rgba(196,116,90,0.3);
+    align-self: flex-start;
+  }
+  .btn-form-submit:hover { background: #B5634A; transform: translateY(-2px); }
+
+  /* Footer */
+  footer {
+    background: var(--warm-dark);
+    color: rgba(255,255,255,0.6);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--terracotta-light); }
+  footer p { font-size: 12px; }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    .hero-right { display: none; }
+    .services { padding: 60px 24px; }
+    .services-list { grid-template-columns: 1fr; }
+    .about { padding: 60px 24px; }
+    .about-inner { grid-template-columns: 1fr; }
+    .reviews { padding: 60px 24px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .contact-section { padding: 60px 24px; }
+    .contact-inner { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="float-cta">
+  <a href="tel:0497283521" class="float-call">
+    📞 Bel & Boek
+  </a>
+</div>
+
+<nav>
+  <a href="#" class="logo">Thai <span>Therapie</span> Massage Ninove</a>
+  <ul class="nav-links">
+    <li><a href="#services">Behandelingen</a></li>
+    <li><a href="#about">Over One</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:0497283521" class="nav-cta">📞 Bel Nu</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-bg-dots"></div>
+  <div class="hero-left">
+    <div class="hero-tag">Elke dag open · 10:00 – 23:00</div>
+    <h1>Traditionele<br>Thaise <em>Massage</em><br>in Ninove</h1>
+    <p>Gerichte behandelingen die helpen bij spierklachten, spanning en herstel — in een rustige en professionele omgeving. Door therapeute One.</p>
+    <div class="hero-btns">
+      <a href="tel:0497283521" class="btn-terra">📞 Bel: 0497 28 35 21</a>
+      <a href="https://wa.me/0497283521" class="btn-sage">WhatsApp Boek</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-stack">
+      <div class="hcard hcard-main">
+        <div class="big-text">€60</div>
+        <div class="label">Per behandeling · 60 min</div>
+        <div class="desc">4 soorten massage — persoonlijk afgestemd op uw lichaam en wat u nodig heeft.</div>
+        <span class="open-pill">✓ Vandaag beschikbaar</span>
+      </div>
+      <div class="hcard hcard-float">
+        <div class="mini-title">Google Reviews</div>
+        <div class="stars-sm">★★★★★</div>
+        <div class="review">"De pijn was meteen verlicht. Uitstekend werk!"</div>
+      </div>
+      <div class="hcard hcard-float2">
+        <div class="icon">🌿</div>
+        <div class="ft">Traditionele<br>Thaise Methode</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-label">Onze Behandelingen</div>
+    <h2 class="section-h">Vier massages,<br>één doel: <em>uw welzijn</em></h2>
+    <div class="services-list">
+      <div class="svc">
+        <div class="svc-img-wrap">
+          <img class="svc-img" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=700&q=80" alt="Traditionele Thaise Massage" loading="lazy">
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon">🙏</div>
+          <div>
+            <h3 class="svc-name">Traditionele Thaise Massage</h3>
+            <p class="svc-desc">Een stevige en diepwerkende massage die het lichaam helpt losmaken en de doorstroming stimuleert. Ideaal bij vastzittende spieren en vermoeidheid.</p>
+            <span class="svc-price">60 min · €60</span>
+          </div>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-img-wrap">
+          <img class="svc-img" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=700&q=80" alt="Ayurvedische Massage" loading="lazy">
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon">🌸</div>
+          <div>
+            <h3 class="svc-name">Ayurvedische Massage</h3>
+            <p class="svc-desc">Een warme, rustgevende massage die lichaam en geest opnieuw in balans brengt. Ondersteunt ontspanning en een diep gevoel van welzijn.</p>
+            <span class="svc-price">60 min · €60</span>
+          </div>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-img-wrap">
+          <img class="svc-img" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=700&q=80" alt="Ontspanningsmassage" loading="lazy">
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon">💆</div>
+          <div>
+            <h3 class="svc-name">Ontspanningsmassage</h3>
+            <p class="svc-desc">Een zachte en kalmerende massage om stress los te laten en volledig tot rust te komen. Perfect voor wie nood heeft aan hernieuwde energie.</p>
+            <span class="svc-price">60 min · €60</span>
+          </div>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-img-wrap">
+          <img class="svc-img" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=700&q=80" alt="Sportmassage" loading="lazy">
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon">🏃</div>
+          <div>
+            <h3 class="svc-name">Sportmassage</h3>
+            <p class="svc-desc">Gericht op spierherstel en het verminderen van spanning na inspanning. Geschikt voor sporters of bij overbelasting en stijve spieren.</p>
+            <span class="svc-price">60 min · €60</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="services-cta">
+      <a href="tel:0497283521" class="btn-terra">📞 Boek uw behandeling: 0497 28 35 21</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-card-wrap">
+      <div class="about-big-card">
+        <div class="about-name">One</div>
+        <div class="about-role">Thaise Massage Therapeute</div>
+        <p>Mijn naam is One en ik ontvang u graag in een rustige en vertrouwde omgeving waar uw welzijn centraal staat.</p>
+        <p>Met jarenlange ervaring in traditionele Thaise massage combineer ik vakkennis met een persoonlijke, zorgzame aanpak.</p>
+        <div class="about-badge">5★<br>Reviews<br>Google</div>
+      </div>
+    </div>
+    <div class="about-info">
+      <h3>Aandacht,<br><em>ervaring</em> en<br>een warm onthaal</h3>
+      <p>Elke behandeling wordt afgestemd op uw lichaam en wat u op dat moment nodig heeft. Of u nu last hebt van spanningen, spierklachten of gewoon even tot rust wilt komen.</p>
+      <p>Voor mij is massage meer dan ontspanning alleen. Het is een manier om lichaam en geest opnieuw in balans te brengen.</p>
+      <div class="hours-box">
+        <div class="hours-title">📅 Openingstijden</div>
+        <div class="hour-r"><span class="d">Maandag – Vrijdag</span><span class="t">10:00 – 23:00</span></div>
+        <div class="hour-r"><span class="d">Zaterdag</span><span class="t">10:00 – 23:00</span></div>
+        <div class="hour-r"><span class="d">Zondag</span><span class="t">10:00 – 23:00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-label">Klantenervaringen</div>
+    <h2 class="section-h">Wat onze klanten <em>zeggen</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Ik heb al een hele tijd last van nek-, schouder- en rugpijn. Ik was hier binnen 2 uur en de pijn was meteen verlicht."</p>
+        <div class="review-author">— Kwanruan L.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Very nice place with a therapist with great experience in massage. Would definitely recommend to anyone!"</p>
+        <div class="review-author">— Daniel A.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Na de behandeling voelde mijn lichaam merkbaar lichter aan. Een rustige, professionele aanpak. Absoluut een aanrader."</p>
+        <div class="review-author">— Hans</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div style="margin-bottom:56px;">
+      <div class="section-label">Neem Contact Op</div>
+      <h2 class="section-h">Boek uw <em>massage</em></h2>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-left">
+        <h3>Direct bereikbaar</h3>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Telefoon</div>
+            <div class="info-val"><a href="tel:0497283521" style="color:var(--warm-dark);font-weight:500;">0497 28 35 21</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Adres</div>
+            <div class="info-val">Denderhoutembaan 11/1<br>9400 Ninove, België</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🕙</div>
+          <div>
+            <div class="info-label">Open</div>
+            <div class="info-val">Elke dag · 10:00 – 23:00</div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="tel:0497283521" class="sbtn sbtn-call">📞 Bel Nu</a>
+          <a href="https://wa.me/0497283521" class="sbtn sbtn-wa">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=Denderhoutembaan+11+9400+Ninove" class="sbtn sbtn-map" target="_blank">📍 Maps</a>
+          <a href="https://facebook.com" class="sbtn sbtn-fb" target="_blank">Facebook</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Uw naam</label>
+            <input type="text" id="name" placeholder="Jan Janssen" required>
+          </div>
+          <div class="form-group">
+            <label>Telefoonnummer</label>
+            <input type="tel" id="phone" placeholder="0497 ..." required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Gewenste massage</label>
+          <select id="service">
+            <option value="">Kies een behandeling...</option>
+            <option>Traditionele Thaise Massage</option>
+            <option>Ayurvedische Massage</option>
+            <option>Ontspanningsmassage</option>
+            <option>Sportmassage</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Bericht (optioneel)</label>
+          <textarea id="message" rows="4" placeholder="Uw klachten of gewenste tijdstip..."></textarea>
+        </div>
+        <button type="submit" class="btn-form-submit">Stuur via WhatsApp →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Thai Therapie Massage Ninove</div>
+  <p>Denderhoutembaan 11/1, 9400 Ninove · Elke dag 10:00 – 23:00</p>
+  <p>© 2026</p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value;
+  const msg = encodeURIComponent(`Hallo, mijn naam is ${name}. Ik wil een afspraak maken${service ? ' voor ' + service : ''}. Tel: ${phone}${message ? '. ' + message : ''}`);
+  window.open(`https://wa.me/0497283521?text=${msg}`, '_blank');
+}
+</script>
+
+</body>
+</html>
